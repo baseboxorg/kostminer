@@ -9,7 +9,6 @@ RUN apk add --update git cmake make gcc g++ libc-dev boost-dev && \
     make && \
     apk del --purge build-dependencies
 
-
 # Metadata params
 ARG BUILD_DATE
 ARG VERSION
