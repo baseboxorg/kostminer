@@ -1,6 +1,6 @@
 FROM kaffepanna/alpine-armv7-qemu
 
-RUN apk add --no-cache --virtual=build-dependencies git cmake make gcc g++ libc-dev boost-dev && \
+RUN apk add --update git cmake make gcc g++ libc-dev boost-dev && \
     git clone --recursive -b kost https://github.com/kost/nheqminer.git && \
     cd /nheqminer/nheqminer && \
     mkdir build && \
