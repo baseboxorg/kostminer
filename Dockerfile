@@ -1,9 +1,8 @@
 FROM alpine
 
 RUN apk add --no-cache --virtual=build-dependencies git cmake make gcc g++ libc-dev boost-dev && \
-    git clone --recursive -b kost https://github.com/kost/nheqminer.git && \
-    cd /nheqminer/nheqminer && \
-    mkdir build && \
+    git clone --recursive -b kost https://github.com/kost/nheqminer.git /nheqminer && \
+    mkdir -p /nheqminer/nheqminer/build && \
     cd /nheqminer/nheqminer/build && \
     cmake -DSTATIC_BUILD=1 -DXENON=2 -DMARCH="-m64" .. && \
     make && \
