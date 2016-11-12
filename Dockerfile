@@ -1,9 +1,8 @@
 FROM kaffepanna/alpine-armv7-qemu
 
 RUN apk add --update git cmake make gcc g++ libc-dev boost-dev && \
-    git clone --recursive -b kost https://github.com/kost/nheqminer.git && \
-    cd /nheqminer/nheqminer && \
-    mkdir build && \
+    git clone --recursive -b kost https://github.com/kost/nheqminer.git /nheqminer && \
+    mkdir -p /nheqminer/nheqminer/build && \
     cd /nheqminer/nheqminer/build && \
     cmake -DNONINTEL=1 -DSTATIC_BUILD=1 -DMARCH="-Wall" .. && \
     make && \
