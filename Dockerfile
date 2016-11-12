@@ -1,25 +1,14 @@
-FROM ubuntu:xenial
+FROM kaffepanna/alpine-armv7-qemu
 
-RUN apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends \
-    build-essential \
-    ca-certificates \
-    cmake \
-    git \
-    libboost-all-dev \
-    wget \
-  && rm -rf /var/lib/apt/lists/* \
-  && git clone --recursive -b kost https://github.com/kost/nheqminer.git /nheqminer \
-  && mkdir -p /nheqminer/nheqminer/build \
-  && cd /nheqminer/nheqminer/build \
-  && cmake -DXENON=1 .. \
-  && make
-  && apt-get purge -y --auto-remove \
-    build-essential \
-    ca-certificates \
-    cmake \
-    git \
-    wget
+RUN apk add --no-cache --virtual=build-dependencies git cmake make gcc g++ libc-dev boost-dev && \
+    git clone --recursive -b kost https://github.com/kost/nheqminer.git && \
+    cd /nheqminer/nheqminer && \
+    mkdir build && \
+    cd /nheqminer/nheqminer/build && \
+    cmake -DNONINTEL=1 -DSTATIC_BUILD=1 -DMARCH="-Wall" .. && \
+    make && \
+    apk del --purge build-dependencies
+
 
 # Metadata params
 ARG BUILD_DATE
