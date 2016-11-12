@@ -13,7 +13,7 @@ RUN apt-get update \
   && mkdir -p /nheqminer/nheqminer/build \
   && cd /nheqminer/nheqminer/build \
   && cmake -DXENON=1 .. \
-  && make
+  && make \
   && apt-get purge -y --auto-remove \
     build-essential \
     ca-certificates \
