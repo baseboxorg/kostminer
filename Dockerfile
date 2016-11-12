@@ -9,18 +9,17 @@ RUN apt-get update \
     libboost-all-dev \
     wget \
   && rm -rf /var/lib/apt/lists/* \
-  && git clone --recursive https://github.com/kost/nheqminer.git \
-  && cd /nheqminer/nheqminer \
-  && mkdir build \
+  && git clone --recursive -b kost https://github.com/kost/nheqminer.git /nheqminer \
+  && mkdir -p /nheqminer/nheqminer/build \
   && cd /nheqminer/nheqminer/build \
-  && cmake -DSTATIC_BUILD=1 -DXENON=2 -DMARCH="-m64" .. \
-  && make  \
+  && cmake -DXENON=1 .. \
+  && make
   && apt-get purge -y --auto-remove \
-      build-essential \
-      ca-certificates \
-      cmake \
-      git \
-      wget
+    build-essential \
+    ca-certificates \
+    cmake \
+    git \
+    wget
 
 # Metadata params
 ARG BUILD_DATE
